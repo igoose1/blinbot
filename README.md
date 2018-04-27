@@ -5,11 +5,6 @@
 
 Требуются
 ```
-pytelegrambotapi
-json
-pymorphy2
-PIL
-logging
+pytelegrambotapi pymorphy2 PIL logging
 ```
-
 модули.
