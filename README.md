@@ -5,6 +5,6 @@
 
 Требуются
 ```
-pytelegrambotapi pymorphy2 PIL logging
+pytelegrambotapi pymorphy2 Pillow logging
 ```
 модули.
