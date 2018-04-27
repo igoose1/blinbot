@@ -11,8 +11,8 @@ from PIL import ImageDraw
 from painter import check_days, draw, get_text, get_day
 
 
-telebot.apihelper.proxy = {
-    'https': 'socks5://proxy:e9eM04JNIEZ2@81.2.240.15:1337'}
+# telebot.apihelper.proxy = {
+#     'https': 'socks5://proxy:e9eM04JNIEZ2@81.2.240.15:1337'}
 
 
 with open('data.json', 'r') as file:
