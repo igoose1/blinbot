@@ -1,0 +1,16 @@
+{
+  "bot_token": "312012723:AAFcAggv5VqHbw80za0iwd2eRnRNdgZZGJI",
+  "error_message_path": "messages/error",
+  "font_size": 80,
+  "fonts_path": "Pacifico-Regular.ttf",
+  "in_picture_path": "donor.png",
+  "last_file_id": "",
+  "last_time": 0,
+  "out_picture_path": "recipient.png",
+  "start_message_path": "messages/start",
+  "storage_chat_id": "-1001280839643",
+  "text_x": 300,
+  "text_y": 100,
+  "to_time": 1523836860,
+  "word": "день"
+}
