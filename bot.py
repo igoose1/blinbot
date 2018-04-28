@@ -1,7 +1,7 @@
 import telebot
 import json
 from pymorphy2 import MorphAnalyzer
-from time import time
+from time import time, sleep
 import logging
 
 from PIL import Image
@@ -29,26 +29,26 @@ logging.basicConfig(
 def send_start(message):
     text = open(data['start_message_path'], 'r').read()
     try:
-        bot.send_message(message.chat.id, text)
-    except:
-        logging.error('Could not send start message')
+        bot.send_message(message.chat.id, text,
+                         reply_to_message_id=message.message_id)
+    except Exception as exception:
+        logging.error(exception)
 
 
 @bot.message_handler(commands=['get_meme'])
 def send_meme(message):
     try:
         bot.send_chat_action(message.chat.id, 'upload_photo')
-        img = open(data['out_picture_path'], 'rb')
         bot.send_photo(message.chat.id, data['last_file_id'],
                        reply_to_message_id=message.message_id)
-        img.close()
-    except:
-        logging.error('Could not send meme')
+        logging.info('Meme sent')
+    except Exception as exception:
+        logging.error(exception)
         text = open(data['error_message_path'], 'r').read()
         try:
             bot.send_message(message.chat.id, text)
-        except:
-            logging.error('Could not send error message')
+        except Exception as exception:
+            logging.error(exception)
 
 
 def morph_word():
@@ -73,13 +73,15 @@ def update_picture(*messages):
     logging.info('Picture updated')
 
     try:
-        img = open(data['out_picture_path'], 'rb')
+        bot.send_chat_action(data['storage_chat_id'], 'upload_photo')
+    except Exception as exception:
+        logging.error(exception)
+
+    with open(data['out_picture_path'], 'rb') as img:
         request = bot.send_photo(data['storage_chat_id'], img)
         data['last_file_id'] = request.photo[-1].file_id
         data['last_time'] = now_time
         logging.info('Picture loaded')
-    except:
-        logging.info('Picture did not load')
 
     with open('data.json', 'w') as file:
         json.dump(data, file)
@@ -95,4 +97,9 @@ if __name__ == '__main__':
     logging.info('Word examples: {}'.format(
         ', '.join([get_text(i, parsed_word) for i in range(12)])))
 
-    bot.polling(none_stop=True)
+    while True:
+        try:
+            bot.polling(True)
+        except Exception as exception:
+            logging.error(exception)
+            sleep(5)
