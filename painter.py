@@ -20,7 +20,7 @@ def get_colour(days):
 
 
 def get_day(time=time()):
-    return time // (60 * 60 * 24)
+    return int(time / (60 * 60 * 24))
 
 
 def get_days(to_time, from_time=time()):
