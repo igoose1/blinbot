@@ -1,16 +1,32 @@
 {
-  "bot_token": "312012723:AAFcAggv5VqHbw80za0iwd2eRnRNdgZZGJI",
-  "error_message_path": "messages/error",
-  "font_size": 80,
-  "fonts_path": "Pacifico-Regular.ttf",
-  "in_picture_path": "donor.png",
-  "last_file_id": "",
-  "last_time": 0,
-  "out_picture_path": "recipient.png",
-  "start_message_path": "messages/start",
-  "storage_chat_id": "-1001280839643",
-  "text_x": 300,
-  "text_y": 100,
-  "to_time": 1523836860,
-  "word": "день"
+  "last": {
+    "day": -17,
+    "file_id": "AgADAgADa6kxG8ALUUsa_nFopaaBVtu5qw4ABHbIM3WjuaOT7z0BAAEC"
+  },
+  "message_path": {
+    "error": "messages/error",
+    "start": "messages/start",
+    "source": "messages/source"
+  },
+  "picture_path": {
+    "in": "donor.png",
+    "out": "recipient.png"
+  },
+  "telegram": {
+    "storage_chat_id": "-1001280839643",
+    "token": "Use @BotFather to get token for bot"
+  },
+  "text": {
+    "coordinate": {
+      "x": 300,
+      "y": 100
+    },
+    "font": {
+      "path": "Pacifico-Regular.ttf",
+      "size": 80
+    },
+    "format": "{0} {1}",
+    "word": "\u0434\u0435\u043d\u044c"
+  },
+  "to_time": 1523826000
 }

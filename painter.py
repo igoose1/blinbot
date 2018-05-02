@@ -1,7 +1,7 @@
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
-from time import time
+from datetime import datetime
 import random
 
 
@@ -19,36 +19,34 @@ def get_colour(days):
     return colour
 
 
-def get_day(time=time()):
-    return int(time / (60 * 60 * 24))
+def get_days(to_time, from_time=datetime.now().timestamp()):
+    to_time_stamp = datetime.fromtimestamp(to_time)
+    from_time_stamp = datetime.fromtimestamp(from_time)
+    difference_time = to_time_stamp - from_time_stamp
+    return difference_time.days
 
 
-def get_days(to_time, from_time=time()):
-    difference_time = get_day(to_time) - get_day(from_time)
-    return int(difference_time)
+def check_days(last_day, to_time, now_time=datetime.now().timestamp()):
+    return get_days(to_time, now_time) == last_day
 
 
-def check_days(last_time, now_time=time()):
-    return get_day(last_time) == get_day(now_time)
-
-
-def get_text(days, parsed_word):
+def get_text(days, parsed_word, text_format):
     try:
         word = parsed_word.make_agree_with_number(abs(days)).word
     except:
         word = parsed_word.word
 
-    return '{} {}'.format(days, word)
+    return text_format.format(days, word)
 
 
-def draw(in_file_path, out_file_path, font_file, to_time, x, y, size, parsed_word):
+def draw(in_file_path, out_file_path, font_file, to_time, x, y, size, text_format, parsed_word):
     img = Image.open(in_file_path)
     drw = ImageDraw.Draw(img)
 
     font = ImageFont.truetype(font_file, size)
 
     days = get_days(to_time)
-    text = get_text(days, parsed_word)
+    text = get_text(days, parsed_word, text_format)
     drw.text((x, y), text, get_colour(days), font=font)
 
     img.save(out_file_path)
