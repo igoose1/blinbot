@@ -4,10 +4,6 @@ from pymorphy2 import MorphAnalyzer
 from time import time, sleep
 import logging
 
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
-
 from painter import check_days, draw, get_text, get_day
 
 
@@ -77,11 +73,14 @@ def update_picture(*messages):
     except Exception as exception:
         logging.error(exception)
 
-    with open(data['out_picture_path'], 'rb') as img:
+    try:
+        img = open(data['out_picture_path'], 'rb')
         request = bot.send_photo(data['storage_chat_id'], img)
         data['last_file_id'] = request.photo[-1].file_id
         data['last_time'] = now_time
         logging.info('Picture loaded')
+    except Exception as exception:
+        logging.error(exception)
 
     with open('data.json', 'w') as file:
         json.dump(data, file)
